@@ -1,3 +1,5 @@
+import SwiftUI
+
 // MARK: - Non-`nil` Result Struct
 public struct NonNilResult<T>: Equatable, Comparable where T: Equatable {
   public var offset: Int
@@ -46,6 +48,7 @@ public extension Sequence {
    * - Parameter operation: The closure to run for each element.
    * - Throws: Rethrows any error thrown by the passed closure.
    */
+  @MainActor
   @inlinable
   func asyncForEach(
     _ operation: (Element) async throws -> Void
@@ -63,6 +66,7 @@ public extension Sequence {
    * - Parameter withPriority: Any specific `TaskPriority` to assign to the async tasks that will perform the closure calls. The default is `nil` (meaning that the system picks a priority).
    * - Parameter operation: The closure to run for each element.
    */
+  @MainActor
   @inlinable
   func concurrentForEach(
     withPriority priority: TaskPriority? = nil,
@@ -86,6 +90,7 @@ public extension Sequence {
    * - Parameter operation: The closure to run for each element.
    * - Throws: Rethrows any error thrown by the passed closure.
    */
+  @MainActor
   @inlinable
   func concurrentForEach(
     withPriority priority: TaskPriority? = nil,
@@ -114,6 +119,7 @@ public extension Sequence {
    * - Returns: The transformed values as an array. The order of the transformed values will match the original sequence.
    * - Throws: Rethrows any error thrown by the passed closure.
    */
+  @MainActor
   @inlinable
   func asyncMap<T>(
     _ transform: (Element) async throws -> T
@@ -134,6 +140,7 @@ public extension Sequence {
    * - Parameter transform: The transform to run on each element.
    * - Returns: The transformed values as an array. The order of the transformed values will match the original sequence.
    */
+  @MainActor
   @inlinable
   func concurrentMap<T>(
     withPriority priority: TaskPriority? = nil,
@@ -163,6 +170,7 @@ public extension Sequence {
    * - Returns: The transformed values as an array. The order of the transformed values will match the original sequence.
    * - Throws: Rethrows any error thrown by the passed closure.
    */
+  @MainActor
   @inlinable
   func concurrentMap<T>(
     withPriority priority: TaskPriority? = nil,
@@ -194,6 +202,7 @@ public extension Sequence {
    * - Returns: The transformed values as an array. The order of the transformed values will match the original sequence, except for teh values that were transformed into `nil`.
    * - Throws: Rethrows any error thrown by the passed closure.
    */
+  @MainActor
   @inlinable
   func asyncCompactMap<T>(
     _ transform: (Element) async throws -> T?
@@ -217,6 +226,7 @@ public extension Sequence {
    * - Parameter transform: The transform to run on each element.
    * - Returns: The transformed values as an array. The order of the transformed values will match the original sequence, except for the values that were transformed into `nil`.
    */
+  @MainActor
   @inlinable
   func concurrentCompactMap<T>(
     withPriority priority: TaskPriority? = nil,
@@ -248,6 +258,7 @@ public extension Sequence {
    * - Returns: The transformed values as an array. The order of the transformed values will match the original sequence, except for the values that were transformed into `nil`.
    * - Throws: Rethrows any error thrown by the passed closure.
    */
+  @MainActor
   @inlinable
   func concurrentCompactMap<T>(
     withPriority priority: TaskPriority? = nil,
@@ -281,6 +292,7 @@ public extension Sequence {
    * - Returns: The transformed values as an array. The order of the transformed values will match the original sequence, with the results of each closure call appearing in-order within the returned array.
    * - Throws: Rethrows any error thrown by the passed closure.
    */
+  @MainActor
   @inlinable
   func asyncFlatMap<T: Sequence>(
     _ transform: (Element) async throws -> T
@@ -301,6 +313,7 @@ public extension Sequence {
    * - Parameter transform: The transform to run on each element.
    * - Returns: The transformed values as an array. The order of the transformed values will match the original sequence, with the results of each closure call appearing in-order within the returned array.
    */
+  @MainActor
   @inlinable
   func concurrentFlatMap<T: Sequence>(
     withPriority priority: TaskPriority? = nil,
@@ -330,6 +343,7 @@ public extension Sequence {
    * - Returns: The transformed values as an array. The order of the transformed values will match the original sequence, with the results of each closure call appearing in-order with the returned array.
    * - Throws: Rethrows any error thrown by the passed closure.
    */
+  @MainActor
   @inlinable
   func concurrentFlatMap<T: Sequence>(
     withPriority priority: TaskPriority? = nil,
